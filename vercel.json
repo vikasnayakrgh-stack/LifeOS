@@ -1,0 +1,20 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/daily-generator",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/reminders",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/cron/worker",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/archive",
+      "schedule": "0 20 * * 6"
+    }
+  ]
+}
