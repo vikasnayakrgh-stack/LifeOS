@@ -1,4 +1,4 @@
-import { login, signup } from './actions'
+import { login, signup, guestLogin } from './actions'
 
 export default function LoginPage({
     searchParams,
@@ -98,6 +98,23 @@ async function LoginContent({
                                 Create Account
                             </button>
                         </div>
+                    </form>
+
+                    {/* Divider */}
+                    <div className="flex items-center gap-3 my-6">
+                        <div className="flex-1 h-px bg-white/10" />
+                        <span className="text-xs text-gray-500">or</span>
+                        <div className="flex-1 h-px bg-white/10" />
+                    </div>
+
+                    {/* Guest Login */}
+                    <form>
+                        <button
+                            formAction={guestLogin}
+                            className="w-full py-3 px-4 bg-gradient-to-r from-amber-600/20 to-orange-600/20 hover:from-amber-600/30 hover:to-orange-600/30 text-amber-400 font-medium rounded-xl border border-amber-500/20 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                        >
+                            <span>👤</span> Try as Guest — with demo data
+                        </button>
                     </form>
                 </div>
 
