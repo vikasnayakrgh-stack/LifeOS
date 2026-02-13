@@ -5,6 +5,7 @@ import TasksTable from '@/components/TasksTable'
 import WeeklyAnalysis from '@/components/WeeklyAnalysis'
 import FocusModeButton from '@/components/FocusModeButton'
 import TaskModal from '@/components/TaskModal'
+import NaturalInput from '@/components/NaturalInput'
 
 export default async function DashboardPage() {
     const supabase = await createClient()
@@ -72,13 +73,16 @@ export default async function DashboardPage() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h2 className="text-2xl font-bold text-white">Dashboard</h2>
-                    <p className="text-gray-500 text-sm mt-1">Execute, don&#39;t just plan.</p>
+                    <p className="text-gray-500 text-sm mt-1">Execute, don't just plan.</p>
                 </div>
                 <div className="flex items-center gap-3">
                     <FocusModeButton />
                     <TaskModal />
                 </div>
             </div>
+
+            {/* Natural Language Input */}
+            <NaturalInput />
 
             {/* Metrics */}
             <MetricsWidget metrics={metrics} />
