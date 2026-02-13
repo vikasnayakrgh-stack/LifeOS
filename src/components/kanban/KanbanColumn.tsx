@@ -17,9 +17,10 @@ interface Props {
     id: string
     title: string
     tasks: Task[]
+    onTimerStop: (taskId: string, duration: number) => void
 }
 
-export function KanbanColumn({ id, title, tasks }: Props) {
+export function KanbanColumn({ id, title, tasks, onTimerStop }: Props) {
     const { setNodeRef } = useDroppable({ id })
 
     return (
@@ -32,7 +33,7 @@ export function KanbanColumn({ id, title, tasks }: Props) {
             <div ref={setNodeRef} className="flex-1 overflow-y-auto min-h-[150px] space-y-3">
                 <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
                     {tasks.map(task => (
-                        <KanbanCard key={task.id} task={task} />
+                        <KanbanCard key={task.id} task={task} onTimerStop={onTimerStop} />
                     ))}
                 </SortableContext>
                 {tasks.length === 0 && (

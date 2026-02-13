@@ -19,6 +19,8 @@ export const metadata: Metadata = {
 
 import { CommandPalette } from '@/components/CommandPalette'
 import { Toaster } from '@/components/ui/sonner'
+import { NotificationListener } from '@/components/NotificationListener'
+
 
 export default function RootLayout({
   children,
@@ -31,7 +33,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CommandPalette />
+        <NotificationListener />
         <Toaster />
+
         {children}
       </body>
     </html>

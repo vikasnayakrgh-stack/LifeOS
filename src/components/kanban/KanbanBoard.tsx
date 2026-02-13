@@ -24,6 +24,7 @@ interface Task {
     status: string
     domain: string | null
     estimated_time: number
+    actual_time?: number
 }
 
 interface Props {
@@ -108,6 +109,29 @@ export default function KanbanBoard({ initialTasks }: Props) {
         }
     }
 
+    const handleTimerStop = async (taskId: string, additionalTime: number) => {
+        // Update local state
+        setTasks(prev => prev.map(t => {
+            if (t.id === taskId) {
+                return { ...t, actual_time: (t.actual_time || 0) + additionalTime }
+            }
+            return t
+        }))
+
+        toast.success(`Tracked ${Math.ceil(additionalTime / 60)} minutes`)
+
+        // API call to persist (mock for now or real if endpoint exists)
+        try {
+            await fetch('/api/tasks/log-time', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: taskId, duration: additionalTime }),
+            })
+        } catch (error) {
+            console.error('Failed to log time:', error)
+        }
+    }
+
     const getTasksByStatus = (status: string) => {
         return tasks.filter(task => task.status === status)
     }
@@ -128,6 +152,7 @@ export default function KanbanBoard({ initialTasks }: Props) {
                         id={col.id}
                         title={col.title}
                         tasks={getTasksByStatus(col.id)}
+                        onTimerStop={handleTimerStop}
                     />
                 ))}
             </div>

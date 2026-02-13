@@ -7,6 +7,9 @@ import FocusModeButton from '@/components/FocusModeButton'
 import TaskModal from '@/components/TaskModal'
 import NaturalInput from '@/components/NaturalInput'
 
+import Link from 'next/link'
+import { Sparkles, Bell, Activity } from 'lucide-react'
+
 export default async function DashboardPage() {
     const supabase = await createClient()
 
@@ -76,6 +79,21 @@ export default async function DashboardPage() {
                     <p className="text-gray-500 text-sm mt-1">Execute, don't just plan.</p>
                 </div>
                 <div className="flex items-center gap-3">
+                    <Link href="/plan">
+                        <button className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 rounded-lg text-sm font-bold text-white hover:opacity-90 transition-opacity">
+                            <Sparkles className="w-4 h-4" /> Weekly Review
+                        </button>
+                    </Link>
+                    <Link href="/health">
+                        <button className="p-2 text-gray-400 hover:text-green-400 transition-colors" title="Health Dashboard">
+                            <Activity className="w-5 h-5" />
+                        </button>
+                    </Link>
+                    <button className="p-2 text-gray-400 hover:text-white transition-colors relative">
+                        <Bell className="w-5 h-5" />
+                        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                    </button>
+                    <div className="h-6 w-[1px] bg-white/10 mx-1" />
                     <FocusModeButton />
                     <TaskModal />
                 </div>

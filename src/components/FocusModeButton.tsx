@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import FocusShield from './FocusShield'
+
 
 export default function FocusModeButton() {
     const router = useRouter()
@@ -30,14 +32,18 @@ export default function FocusModeButton() {
         }
     }
 
-    if (active) {
+    if (active && endTime) {
         return (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
-                <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                <span className="text-xs text-purple-400 font-medium">Focus until {endTime}</span>
-            </div>
+            <>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20 cursor-pointer" onClick={() => setActive(true)}>
+                    <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                    <span className="text-xs text-purple-400 font-medium">Focus until {endTime}</span>
+                </div>
+                <FocusShield endTime={endTime} onEndSession={() => setActive(false)} />
+            </>
         )
     }
+
 
     return (
         <button
